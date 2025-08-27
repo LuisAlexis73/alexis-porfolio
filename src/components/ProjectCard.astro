@@ -1,0 +1,165 @@
+---
+import LinkButton from "./LinkButton.astro";
+import CodeIcon from "@/assets/icons/CodeIcon.astro";
+import BrandDribbleIcon from "@/assets/icons/BrandDribbleIcon.astro";
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  project?: CollectionEntry<"projects"> | Record<string, any> | null;
+}
+
+const project = Astro.props.project;
+const data = project?.data ?? project ?? {};
+
+const variantClasses = {
+  default: "p-4 rounded-lg bg-neutral-800 h-full flex flex-col gap-4",
+  compact: "p-3 rounded-lg bg-neutral-800 h-full flex flex-col gap-2",
+  highlight:
+    "p-6 rounded-2xl bg-gradient-to-br from-neutral-700 to-neutral-800 h-full flex flex-col gap-4",
+}["default"];
+
+const maxVisibleStack = 4;
+const stack = data.stack ?? [];
+const visibleStack = stack.slice(0, maxVisibleStack);
+const extraCount = Math.max(0, stack.length - visibleStack.length);
+const detailsId = `stack-details-${data.title?.replace(/\s+/g, "-").toLowerCase()}`;
+---
+
+<article
+  class={variantClasses}
+  role="article"
+  aria-labelledby={`title-${data.title}`}
+>
+  <header>
+    <h3 id={`title-${data.title}`} class="text-lg font-semibold">
+      <a href={`/projects/${project?.slug}`} class="hover:underline">
+        {data.title}
+      </a>
+    </h3>
+  </header>
+
+  {
+    data.image && (
+      <a href={`/projects/${project?.slug}`}>
+        <img
+          transition:name={`img-${project?.slug}`}
+          src={data.image}
+          alt={`${data.title}-cover`}
+          class="rounded shadow-md my-2 object-cover w-full h-44 hover:scale-105 transition-transform duration-500"
+        />
+      </a>
+    )
+  }
+
+  {
+    data.description && (
+      <p class="mt-2 text-sm leading-relaxed text-pretty">{data.description}</p>
+    )
+  }
+
+  {
+    stack.length > 0 && (
+      <div class="mt-2">
+        <div class="flex flex-wrap gap-2 items-start details-row">
+          {visibleStack.map((t: unknown) => (
+            <span class="text-sm text-neutral-300 px-2 py-1 rounded border border-neutral-700">
+              {t}
+            </span>
+          ))}
+          {extraCount === 0 ? null : (
+            <details id={detailsId} class="group self-start">
+              <summary
+                class="cursor-pointer select-none text-sm px-2 py-1 rounded border border-neutral-700 inline-flex items-center gap-2 text-neutral-300 hover:bg-neutral-700"
+                role="button"
+              >
+                <span class="more">+{extraCount} más</span>
+                <span class="less">ver menos</span>
+              </summary>
+
+              <div class="details-content">
+                <div class="tag-row">
+                  {stack.slice(maxVisibleStack).map((t: unknown) => (
+                    <span class="text-sm text-neutral-300 px-2 py-1 rounded border border-neutral-700">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </details>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  <div class="mt-3">
+    <slot />
+  </div>
+
+  <footer class="mt-2 flex gap-3">
+    {
+      data.demoUrl && (
+        <LinkButton href={data.demoUrl}>
+          Demo
+          <BrandDribbleIcon />
+        </LinkButton>
+      )
+    }
+    {
+      data.codeUrl && (
+        <LinkButton href={data.codeUrl}>
+          <CodeIcon />
+          Code
+        </LinkButton>
+      )
+    }
+  </footer>
+</article>
+
+<style>
+  /* ocultar el marker por defecto (estético) */
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+  details summary::marker {
+    display: none;
+  }
+
+  /* Toggle de texto sin JS */
+  details:not([open]) .less {
+    display: none;
+  }
+  details[open] .more {
+    display: none;
+  }
+
+  /* Un pequeño padding al contenido expandido para que no pegue */
+  .details-content > .tag-row {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+/* Aplica al contenedor flex que tiene los chips + details */
+.details-row > details {
+  min-width: 0; /* permite que el flex-item encoja correctamente */
+  align-self: flex-start;
+}
+
+/* Cuando está abierto, ocupa toda la fila */
+.details-row > details[open] {
+  flex-basis: 100%;
+  width: 100%;
+  margin-top: 0.25rem; /* separación visual */
+}
+
+/* Contenido expandido: que se alinee a la izquierda y haga wrap */
+.details-row > details[open] .details-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+</style>

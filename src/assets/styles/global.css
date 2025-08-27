@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Pequeñas customizaciones para reproducir la estética Hyperspace */
+body.is-preload {
+  opacity: 0;
+  transition: opacity .25s ease-in;
+}
+
+body {
+  @apply bg-neutral-900 text-slate-100 antialiased;
+}
+
+/* Sidebar active nav */
+.sidebar a.active {
+  @apply text-white font-semibold;
+}

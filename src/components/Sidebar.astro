@@ -1,0 +1,78 @@
+---
+import FileCvIcon from "@/assets/icons/FileCvIcon.astro";
+import GitHubIcon from "@/assets/icons/GitHubIcon.astro";
+import LinkedInIcon from "@/assets/icons/LinkedInIcon.astro";
+import LinkButton from "./LinkButton.astro";
+
+const nav = [
+  { href: "/", label: "Inicio", key: "home" },
+  { href: "/projects", label: "Proyectos", key: "projects" },
+  { href: "/experience", label: "Experiencia", key: "experience" },
+  { href: "/about", label: "Sobre mí", key: "about" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<aside
+  id="sidebar"
+  class="w-20 lg:w-64 fixed inset-y-0 left-0 bg-gradient-to-br from-neutral-800 to-neutral-900 text-slate-200"
+>
+  <div class="h-full flex flex-col">
+    <div class="px-2 py-3 text-center">
+      <a href="/">
+        <img
+          src="/images/logo-alexis.png"
+          alt="alexis galarza logo"
+          class="size-44 mx-auto"
+        />
+      </a>
+
+      <div class="pt-6 flex justify-center gap-3">
+        <LinkButton href="https://github.com/LuisAlexis73">
+          <GitHubIcon />
+        </LinkButton>
+
+        <LinkButton href="https://www.linkedin.com/in/luis-alexis-galarza/">
+          <LinkedInIcon />
+        </LinkButton>
+
+        <!-- descarga directamente
+        href="https://drive.google.com/uc?export=download&id=1xhScUE9SPppkjWhTFwblKR40e9wOkVri"
+        download -->
+        <LinkButton
+          href="https://drive.google.com/file/d/1xhScUE9SPppkjWhTFwblKR40e9wOkVri/view?usp=sharing"
+        >
+          <FileCvIcon />
+        </LinkButton>
+      </div>
+    </div>
+
+    <nav class="flex-1 flex items-center px-2">
+      <ul class="w-full space-y-1 text-center">
+        {
+          nav.map((item) => {
+            const isActive = currentPath === item.href;
+
+            return (
+              <li class="w-full font-bold text-lg">
+                <LinkButton
+                  href={item.href}
+                  className={`!block py-3 border-0 ${isActive ? "border-b-3 border-yellow-200/70 hover:scale-105 transition-transform duration-500" : "hover:bg-neutral-600 hover:scale-105 transition-transform duration-500"}`}
+                >
+                  {item.label}
+                </LinkButton>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+
+    <footer
+      class="px-4 py-6 mx-auto border-t border-neutral-700 text-sm text-neutral-400"
+    >
+      <div>&copy; {new Date().getFullYear()} Luis Alexis Galarza</div>
+    </footer>
+  </div>
+</aside>

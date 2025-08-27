@@ -1,0 +1,135 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+
+const hardSkils = [
+  "JavaScript / TypeScript",
+  "Node.js / NestJS",
+  "React / Astro / Next.js",
+  "Docker / PostgreSQL / MySQL / MongoDB",
+  "Prisma / TypeORM",
+  "HTML5 / CSS3 / TailwindCSS / Bootstrap",
+  "Git / GitHub / CI-CD",
+  "Metodologías ágiles (SCRUM)",
+];
+---
+
+<MainLayout title="Sobre mí | Alexis">
+  <section class="max-w-5xl mx-auto">
+    <h1 class="text-3xl lg:text-5xl font-bold mb-6 text-center">Sobre mí</h1>
+    <p class="text-neutral-300 mb-6 prose max-w-5xl">
+      Desde siempre fui un entusiasta de la tecnología y la informática, lo que
+      naturalmente me llevó a especializarme en la programación y el desarrollo
+      de software.
+    </p>
+    <p class="text-neutral-300 mb-6 prose max-w-5xl">
+      Además de mi perfil técnico, me considero una persona creativa y con una
+      gran capacidad para resolver problemas. Me encanta enfrentarme a nuevos
+      desafíos y encontrar soluciones innovadoras que aporten valor a los
+      proyectos en los que trabajo. Soy una persona proactiva, responsable y
+      comprometida con mi trabajo, siempre buscando la excelencia en todo lo que
+      hago. Me gusta trabajar en equipo y aprender de mis compañeros, ya que
+      creo que la colaboración es clave para el éxito en cualquier proyecto. En
+      mi tiempo libre, disfruto explorando nuevas tecnologías y tendencias en el
+      mundo del desarrollo web, así como participando en comunidades de
+      desarrolladores para compartir conocimientos y experiencias.
+      <span class="text-yellow-400/90"
+        >Valoro el trabajo en equipo y la buena comunicación, aunque también
+        cuento con autonomía y la experiencia necesaria para realizar tareas
+        complejas de forma independiente.</span
+      >
+      Estoy emocionado por seguir creciendo profesionalmente y contribuir al desarrollo
+      de soluciones tecnológicas que hagan una diferencia positiva en la vida de
+      las personas.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-6 mb-3">Habilidades</h2>
+    <ul class="grid grid-cols-2 gap-3">
+      {
+        hardSkils.map((skil) => (
+          <li class="bg-neutral-800 p-3 rounded hover:bg-neutral-700 text-yellow-50 transition-colors">
+            {skil}
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="text-neutral-300 my-6 prose max-w-5xl">
+      Además de mi formación en programación, soy Técnico Mecánico y he estado
+      vinculado al sector metalúrgico y macánico, realizando diversos trabajos
+      relacionados a esa área. Hace algunos años decidí dar un giro en mi
+      carrera personal y profesional, ya que sentía que las tares que realizaba
+      limitaba mi crecimiento. Fue entonces cuando tomé la decisión de enfocarme
+      completamente en la programación y el desarrollo web. Este camino me ha
+      permitido visualizar un futuro con mayores oportunidades, además de
+      motivarme a seguir perfeccionándome y mantenerme al día con las últimas
+      tendencias y tecnologías emergentes.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-6 mb-3 lg:text-4xl">Formación</h2>
+    <div class="grid grid-cols-2 gap-x-2">
+      <div>
+        <h4 class="text-neutral-300">Bootcamp MindHub LA — 700+ horas.</h4>
+        <span class="text-yellow-200">05/2022 - 09/2022</span>
+        <p class="text-neutral-300 mb-2">
+          <em>Mind Hub LA, Buenos Aires Argentina</em>
+        </p>
+
+        <p class="text-neutral-300 mb-2 prose max-w-5xl">
+          Bootcamp Full Stack Java con más de 700hs full-time utilizando
+          metodologías ágiles(SCRUM) simulando un entorno de trabajo real con
+          tecnologías como:
+          <ul>
+            <li>
+              Java, spring-boot, JPA, Hibernate, PostgreSQL, Spring-Security,
+            </li>
+            <li>JavaScript, Vuejs,</li>
+            <li>HTML5, CSS3, Bootstrap5.</li>
+          </ul>
+        </p>
+
+        <a
+          href="https://www.credly.com/badges/ec3661a8-da05-4c23-bae8-90fa8017d85c/public_url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/images/Insignia.png"
+            alt="insignia Mind Hub"
+            class="rounded shadow-md object-cover mt-6 h-auto"
+          />
+        </a>
+      </div>
+
+      <div>
+        <h4 class="text-neutral-300">Oracle + alura Latam — 300+ horas.</h4>
+        <span class="text-yellow-200">05/2022 - 09/2022</span>
+        <p class="text-neutral-300 mb-2">
+          <em>Alura Latam | One Oracle Next Education</em>
+        </p>
+        <p class="text-neutral-300 mb-2 prose max-w-5xl">
+          ONE es un programa de educación y empleabilidad en colaboración con
+          Alura. Tiene el objetivo social de formar personas en tecnología y
+          conectarlas con el mercado laboral a través de una alianza de
+          empresas. El programa fue orientado a un entorno Full Stack Java,
+          donde se enseñan tecnologías como:
+          <ul>
+            <li>Java, JDBC</li>
+            <li>JavaScript, HTML5, CSS3</li>
+          </ul>
+        </p>
+
+        <a
+          href="https://app.aluracursos.com/user/alexgalar/fullCertificate/cb1a4e61951ac1c883fc84dfb51a6eab"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src="/images/cerificado-one.png"
+            alt="Certificado programa next education"
+            class="rounded shadow-md object-cover h-72 mt-7"
+          />
+        </a>
+      </div>
+    </div>
+  </section>
+</MainLayout>
