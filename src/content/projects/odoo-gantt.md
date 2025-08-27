@@ -10,7 +10,7 @@ stack:
   - Owl
   - PostgreSQL
 codeUrl: "https://github.com/LuisAlexis73/odoo_gantt/tree/main"
-demoUrl: "https://youtu.be/O9XWCma-l9k"
+demoUrl: "https://github.com/LuisAlexis73/odoo_gantt/tree/main"
 variant: "default"
 featured: true
 date: "2025-08-15"
