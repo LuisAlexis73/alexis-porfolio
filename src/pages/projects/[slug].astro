@@ -23,52 +23,50 @@ const { Content } = await project.render();
 ---
 
 <MainLayout>
-  <main class="max-w-5xl mx-auto">
-    <article class="prose prose-invert max-w-none">
-      <header>
-        <!-- class="fixed top-0 z-10 flex items-center justify-between bg-neutral-800/20 backdrop-blur-md w-full max-w-5xl rounded-b-sm" -->
-        <div class="flex justify-between">
-          <div>
-            <LinkButton href="javascript:history.back()">
-              <ArrowLeftIcon />
-            </LinkButton>
-          </div>
-
-          <h1 class="text-3xl lg:text-4xl">
-            {data.title}
-          </h1>
-
-          <div>
-            <LinkButton href={data.demoUrl}>
-              <BrandDribbleIcon />
-            </LinkButton>
-
-            <LinkButton href={data.codeUrl}>
-              <CodeIcon />
-            </LinkButton>
-          </div>
+  <article class="prose prose-invert lg:max-w-5xl lg:mx-auto">
+    <header>
+      <!-- class="fixed top-0 z-10 flex items-center justify-between bg-neutral-800/20 backdrop-blur-md w-full max-w-5xl rounded-b-sm" -->
+      <div class="flex flex-col items-center lg:justify-between lg:flex-row">
+        <div class="hidden lg:block">
+          <LinkButton href="javascript:history.back()">
+            <ArrowLeftIcon />
+          </LinkButton>
         </div>
 
-        {
-          data.image && (
-            <img
-              transition:name={`img-${slug}`}
-              src={data.image}
-              alt={data.title}
-              class="w-full rounded"
-            />
-          )
-        }
+        <h1 class="text-3xl lg:text-4xl lg:mb-1">
+          {data.title}
+        </h1>
 
-        <p>
-          {data.description}
-        </p>
-      </header>
+        <div class="flex gap-x-6 lg:gap-x-1">
+          <LinkButton href={data.demoUrl}>
+            <BrandDribbleIcon />
+          </LinkButton>
 
-      <section class="mt-6">
-        <!-- Renderiza el contenido del markdown -->
-        <Content />
-      </section>
-    </article>
-  </main>
+          <LinkButton href={data.codeUrl}>
+            <CodeIcon />
+          </LinkButton>
+        </div>
+      </div>
+
+      {
+        data.image && (
+          <img
+            transition:name={`img-${slug}`}
+            src={data.image}
+            alt={data.title}
+            class="w-full rounded lg:mt-16"
+          />
+        )
+      }
+
+      <p>
+        {data.description}
+      </p>
+    </header>
+
+    <section class="mt-6">
+      <!-- Renderiza el contenido del markdown -->
+      <Content />
+    </section>
+  </article>
 </MainLayout>

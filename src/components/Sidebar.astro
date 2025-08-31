@@ -14,9 +14,39 @@ const nav = [
 const currentPath = Astro.url.pathname;
 ---
 
+<button
+  id="sidebarToggle"
+  class="fixed top-4 left-4 z-40 lg:hidden p-2 rounded-md bg-neutral-800 text-slate-200 shadow-lg"
+  aria-controls="sidebar"
+  aria-expanded="false"
+>
+  <span class="sr-only">Abrir menú</span>
+
+  <svg
+    class="w-6 h-6"
+    aria-hidden="true"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      clip-rule="evenodd"
+      fill-rule="evenodd"
+      d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+    ></path>
+  </svg>
+</button>
+
+<div
+  id="sidebarOverlay"
+  class="fixed inset-0 z-30 bg-black/50 hidden lg:hidden"
+>
+</div>
+
 <aside
   id="sidebar"
-  class="w-20 lg:w-64 fixed inset-y-0 left-0 bg-gradient-to-br from-neutral-800 to-neutral-900 text-slate-200"
+  class="fixed inset-y-0 left-0 z-50 transform -translate-x-full lg:translate-x-0 lg:fixed w-64 transition-transform duration-300 ease-in-out bg-gradient-to-br from-neutral-800 to-neutral-900 text-slate-200"
+  aria-hidden="true"
 >
   <div class="h-full flex flex-col">
     <div class="px-2 py-3 text-center">
@@ -76,3 +106,58 @@ const currentPath = Astro.url.pathname;
     </footer>
   </div>
 </aside>
+
+<script>
+  (function () {
+    const toggleBtn = document.getElementById("sidebarToggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebarOverlay");
+
+    function openSidebar() {
+      if (!sidebar || !toggleBtn || !overlay) return;
+      sidebar.classList.remove("-translate-x-full");
+      sidebar.setAttribute("aria-hidden", "false");
+      toggleBtn.setAttribute("aria-expanded", "true");
+      overlay.classList.remove("hidden");
+    }
+
+    function closeSidebar() {
+      if (!sidebar || !toggleBtn || !overlay) return;
+      sidebar.classList.add("-translate-x-full");
+      sidebar.setAttribute("aria-hidden", "true");
+      toggleBtn.setAttribute("aria-expanded", "false");
+      overlay.classList.add("hidden");
+    }
+
+    toggleBtn?.addEventListener("click", function () {
+      const expanded = toggleBtn?.getAttribute("aria-expanded") === "true";
+      if (expanded) closeSidebar();
+      else openSidebar();
+    });
+
+    overlay?.addEventListener("click", closeSidebar);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeSidebar();
+    });
+
+    function handleResize() {
+      if (window.matchMedia("(min-width: 1024px)").matches) {
+        if (!sidebar || !toggleBtn || !overlay) return;
+
+        // en desktop: mostrar sidebar fijo (sin transform)
+        sidebar.classList.remove("-translate-x-full");
+        sidebar.setAttribute("aria-hidden", "false");
+        overlay.classList.add("hidden");
+        toggleBtn.setAttribute("aria-expanded", "true");
+      } else {
+        // en móvil: ocultar por defecto
+        sidebar?.classList.add("-translate-x-full");
+        sidebar?.setAttribute("aria-hidden", "true");
+        toggleBtn?.setAttribute("aria-expanded", "false");
+      }
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+  })();
+</script>
