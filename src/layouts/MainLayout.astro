@@ -4,6 +4,7 @@ import "@fontsource-variable/onest";
 import "@/assets/styles/global.css";
 
 import Sidebar from "@/components/Sidebar.astro";
+import VideoModal from "@/components/VideoModal.astro";
 
 const { title = "Alexis Portfolio" } = Astro.props;
 ---
@@ -29,6 +30,7 @@ const { title = "Alexis Portfolio" } = Astro.props;
 
     <main class="p-8 container lg:p-12 lg:ml-52">
       <slot />
+      <VideoModal />
     </main>
   </body>
 </html>

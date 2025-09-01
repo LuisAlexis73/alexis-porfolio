@@ -1,13 +1,28 @@
 ---
-const { href, className = "" } = Astro.props;
+const { href, className = "", title = "" } = Astro.props;
 
-const isExternal = href.startsWith("http");
+const isVideo = typeof href === "string" && /(?:youtu\.be|youtube(?:-nocookie)?\.com)/i.test(href);
+const isExternal = typeof href === "string" && href.startsWith("http") && !/youtube(?:-nocookie)?\.com|youtu\.be/i.test(href);
 ---
 
-<a
-  href={href}
-  class=`inline-flex items-center gap-2 px-5 py-2 rounded-lg border border-neutral-700 hover:bg-neutral-700 hover:scale-105 hover:text-yellow-300/80 transition-transform duration-500 ${className}`
-  {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
->
-  <slot />
-</a>
+{
+  isVideo ? (
+    <button
+      type="button"
+      data-video={href}
+      class=`inline-flex items-center gap-2 px-5 py-2 rounded-lg border border-neutral-700 hover:bg-neutral-700 hover:scale-105 hover:text-yellow-300/80 transition-transform duration-500 cursor-pointer ${className}`
+      title={title}
+    >
+      <slot />
+    </button>
+  ) : (
+    <a
+      href={href}
+      class=`inline-flex items-center gap-2 px-5 py-2 rounded-lg border border-neutral-700 hover:bg-neutral-700 hover:scale-105 hover:text-yellow-300/80 transition-transform duration-500 ${className}`
+      {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+      title={title}
+    >
+      <slot />
+    </a>
+  )
+}

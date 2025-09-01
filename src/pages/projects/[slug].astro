@@ -2,7 +2,9 @@
 import ArrowLeftIcon from "@/assets/icons/ArrowLeftIcon.astro";
 import BrandDribbleIcon from "@/assets/icons/BrandDribbleIcon.astro";
 import CodeIcon from "@/assets/icons/CodeIcon.astro";
+import YouTubeIcon from "@/assets/icons/YouTubeIcon.astro";
 import LinkButton from "@/components/LinkButton.astro";
+import VideoModal from "@/components/VideoModal.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
@@ -38,9 +40,17 @@ const { Content } = await project.render();
         </h1>
 
         <div class="flex gap-x-6 lg:gap-x-1">
-          <LinkButton href={data.demoUrl}>
-            <BrandDribbleIcon />
-          </LinkButton>
+          {
+            data.demoUrl ? (
+              <LinkButton href={data.demoUrl}>
+                <BrandDribbleIcon />
+              </LinkButton>
+            ) : (
+              <LinkButton href={data.videoUrl}>
+                <YouTubeIcon />
+              </LinkButton>
+            )
+          }
 
           <LinkButton href={data.codeUrl}>
             <CodeIcon />
@@ -69,4 +79,6 @@ const { Content } = await project.render();
       <Content />
     </section>
   </article>
+
+  <VideoModal />
 </MainLayout>

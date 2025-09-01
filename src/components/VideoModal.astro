@@ -1,0 +1,128 @@
+---
+
+---
+
+<dialog id="video-dialog" class="p-0 rounded-lg max-w-4xl w-full m-auto">
+  <div class="bg-black/95 rounded-lg overflow-hidden">
+    <!-- <button
+      data-close
+      aria-label="Cerrar"
+      class="absolute top-3 right-3 z-20 bg-white/10 hover:bg-white/20 rounded-full py-1 px-3 text-white cursor-pointer"
+    >
+      ✕
+    </button> -->
+
+    <!-- Iframe responsive -->
+    <div class="w-full aspect-video">
+      <iframe
+        id="video-iframe"
+        src=""
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen
+        class="w-full h-full"></iframe>
+    </div>
+  </div>
+</dialog>
+
+<script type="module">
+  (() => {
+    if (typeof window === "undefined") return; // safety for SSR
+
+    const dialog = document.getElementById("video-dialog");
+    const iframe = document.getElementById("video-iframe");
+
+    // Extrae ID soportando youtu.be / watch?v= / shorts / embed
+    const extractYouTubeId = (url) => {
+      if (!url || typeof url !== "string") return null;
+      const m = url.match(
+        /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?v=|embed\/|shorts\/)|v=)([A-Za-z0-9_-]{10,12})/
+      );
+      if (m && m[1]) return m[1];
+      try {
+        const u = new URL(url);
+        return u.searchParams.get("v");
+      } catch (e) {
+        return null;
+      }
+    };
+
+    const openWithUrl = (rawUrl) => {
+      const id = extractYouTubeId(rawUrl);
+      if (!id) {
+        console.warn("[VideoModal] URL inválida:", rawUrl);
+        return;
+      }
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      try {
+        dialog.showModal();
+      } catch (e) {
+        dialog.setAttribute("open", "");
+      }
+      dialog.setAttribute("aria-hidden", "false");
+      // enfoque en el botón cerrar para accesibilidad
+      const cb = dialog.querySelector("[data-close]");
+      if (cb) cb.focus();
+    };
+
+    const closeDialog = () => {
+      iframe.src = ""; // detener el video
+      try {
+        dialog.close();
+      } catch (e) {
+        dialog.removeAttribute("open");
+      }
+      dialog.setAttribute("aria-hidden", "true");
+    };
+
+    // Cerrar al click sobre backdrop (si el target es el dialog mismo)
+    dialog.addEventListener("click", (ev) => {
+      if (ev.target === dialog) closeDialog();
+    });
+
+    // Botón cerrar
+    const closeBtn = dialog.querySelector("[data-close]");
+    if (closeBtn) closeBtn.addEventListener("click", closeDialog);
+
+    // Cerrar con Escape
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape" && dialog.open) closeDialog();
+    });
+
+    // Delegación: abrir modal para cualquier elemento con data-video
+    const bindTriggers = () => {
+      document.querySelectorAll("[data-video]").forEach((el) => {
+        // evitar doble-binding
+        if (el.__videoBound) return;
+        el.__videoBound = true;
+
+        el.addEventListener("click", (e) => {
+          // prevenir navegación si es un <a>
+          if (e && typeof e.preventDefault === "function") {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          const raw = el.dataset.video || el.getAttribute("href") || "";
+          openWithUrl(raw);
+        });
+      });
+    };
+
+    // Bind inicial y observer por si cargás botones dinámicamente
+    bindTriggers();
+    const mo = new MutationObserver(() => bindTriggers());
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Asegurarse limpiar iframe si el dialog dispara 'close' por API
+    dialog.addEventListener("close", () => {
+      iframe.src = "";
+    });
+  })();
+</script>
+
+<style>
+  /* backdrop styling (soporta browsers con ::backdrop) */
+  #video-dialog::backdrop {
+    background: rgba(39, 38, 33, 0.288);
+    backdrop-filter: blur(2px);
+  }
+</style>

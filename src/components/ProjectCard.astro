@@ -3,6 +3,8 @@ import LinkButton from "./LinkButton.astro";
 import CodeIcon from "@/assets/icons/CodeIcon.astro";
 import BrandDribbleIcon from "@/assets/icons/BrandDribbleIcon.astro";
 import type { CollectionEntry } from "astro:content";
+import YouTubeIcon from "@/assets/icons/YouTubeIcon.astro";
+import VideoModal from "./VideoModal.astro";
 
 export interface Props {
   project?: CollectionEntry<"projects"> | Record<string, any> | null;
@@ -98,16 +100,19 @@ const detailsId = `stack-details-${data.title?.replace(/\s+/g, "-").toLowerCase(
 
   <footer class="mt-2 flex gap-3">
     {
-      data.demoUrl && (
-        <LinkButton href={data.demoUrl}>
-          Demo
+      data.demoUrl ? (
+        <LinkButton href={data.demoUrl} title="Ver Demo">
           <BrandDribbleIcon />
+        </LinkButton>
+      ) : (
+        <LinkButton href={data.videoUrl} title="Ver Video">
+          <YouTubeIcon />
         </LinkButton>
       )
     }
     {
       data.codeUrl && (
-        <LinkButton href={data.codeUrl}>
+        <LinkButton href={data.codeUrl} title="Ver Código Fuente">
           <CodeIcon />
           Code
         </LinkButton>
@@ -116,6 +121,7 @@ const detailsId = `stack-details-${data.title?.replace(/\s+/g, "-").toLowerCase(
   </footer>
 </article>
 
+<VideoModal />
 <style>
   /* ocultar el marker por defecto (estético) */
   details summary::-webkit-details-marker {
@@ -141,25 +147,25 @@ const detailsId = `stack-details-${data.title?.replace(/\s+/g, "-").toLowerCase(
     gap: 0.5rem;
   }
 
-/* Aplica al contenedor flex que tiene los chips + details */
-.details-row > details {
-  min-width: 0; /* permite que el flex-item encoja correctamente */
-  align-self: flex-start;
-}
+  /* Aplica al contenedor flex que tiene los chips + details */
+  .details-row > details {
+    min-width: 0; /* permite que el flex-item encoja correctamente */
+    align-self: flex-start;
+  }
 
-/* Cuando está abierto, ocupa toda la fila */
-.details-row > details[open] {
-  flex-basis: 100%;
-  width: 100%;
-  margin-top: 0.25rem; /* separación visual */
-}
+  /* Cuando está abierto, ocupa toda la fila */
+  .details-row > details[open] {
+    flex-basis: 100%;
+    width: 100%;
+    margin-top: 0.25rem; /* separación visual */
+  }
 
-/* Contenido expandido: que se alinee a la izquierda y haga wrap */
-.details-row > details[open] .details-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  width: 100%;
-  box-sizing: border-box;
-}
+  /* Contenido expandido: que se alinee a la izquierda y haga wrap */
+  .details-row > details[open] .details-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
 </style>

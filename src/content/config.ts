@@ -10,6 +10,7 @@ const projectCollection = defineCollection({
     stack: z.array(z.string()).optional(),
     demoUrl: z.string().url().optional(),
     codeUrl: z.string().url().optional(),
+    videoUrl: z.string().url().optional(),
     variant: z.enum(["default", "wide"]).default("default").optional(),
     featured: z.boolean().default(false).optional(),
     date: z.string().optional(),
