@@ -1,6 +1,6 @@
 ---
 title: "Teslo Shop"
-description: "Proyecto e-commerce full-stack con experiencia de compra completa: búsqueda, carrito, procesamiento de ordenes y pasarela de pagos."
+description: "Proyecto e-commerce full-stack con experiencia de compra completa: búsqueda, carrito, pasarela de pagos, procesamiento de ordenes, panel administrativo para gestionar productos y clientes."
 image: "/images/captura-tesloshop.png"
 stack:
   - Next.js V15

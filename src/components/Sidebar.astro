@@ -11,7 +11,15 @@ const nav = [
   { href: "/about", label: "Sobre mí", key: "about" },
 ];
 
-const currentPath = Astro.url.pathname;
+const normalizePath = (path: string) => {
+  if (!path) return "/";
+  const url = new URL(path, Astro.site || Astro.url);
+  const pathname = url.pathname.replace(/\/+$/, "");
+
+  return pathname === "" ? "/" : pathname;
+};
+
+const currentPath = normalizePath(Astro.url.pathname);
 ---
 
 <button
