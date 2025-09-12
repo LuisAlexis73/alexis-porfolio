@@ -34,7 +34,11 @@ const detailsId = `stack-details-${data.title?.replace(/\s+/g, "-").toLowerCase(
 >
   <header>
     <h3 id={`title-${data.title}`} class="text-lg font-semibold">
-      <a href={`/projects/${project?.slug}`} class="hover:underline">
+      <a
+        href={`/projects/${project?.slug}`}
+        class="hover:underline"
+        title="ir al detalle"
+      >
         {data.title}
       </a>
     </h3>
@@ -42,13 +46,16 @@ const detailsId = `stack-details-${data.title?.replace(/\s+/g, "-").toLowerCase(
 
   {
     data.image && (
-      <a href={`/projects/${project?.slug}`}>
+      <a href={`/projects/${project?.slug}`} class="relative block group">
         <img
           transition:name={`img-${project?.slug}`}
           src={data.image}
           alt={`${data.title}-cover`}
-          class="rounded shadow-md my-2 object-cover w-full h-44 hover:scale-105 transition-transform duration-500"
+          class="rounded shadow-md my-2 object-cover w-full h-44 group-hover:blur-[1px] transition-transform duration-500"
         />
+        <span class="absolute inset-0 flex items-center justify-center text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/30 rounded">
+          Ver más
+        </span>
       </a>
     )
   }

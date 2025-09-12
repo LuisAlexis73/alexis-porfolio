@@ -1,7 +1,7 @@
 ---
 title: "Amazing Events"
-description: "Web desarrollada durante el bootcamp en Mind Hub. Muestra eventos pasdos y futuros consumiendo los datos desde una api y los muestra de manera dinámica dentro de cada página correspondiente."
-image: "/images/amazing-events.webp"
+description: "Aplicación web desarrollada durante el bootcamp en Mind Hub. Muestra eventos pasdos y futuros consumiendo los datos desde una api y los muestra de manera dinámica dentro de cada página correspondiente."
+image: "/images/captura-amazing-events.png"
 stack:
   - HTML,
   - CSS,
@@ -16,9 +16,10 @@ date: "2022-05-29"
 
 ### Descripción completa
 
-Aplicación web que muestra distintos eventos como: Conciertos, Fiestas, Salidas recreativas, etc; consumiendo los datos desde una API externa. Esta aplicación formo parte del Bootcamp impartido por MindHub para poner en practica los conocimientos de las tecnologías aprendidas.
+Esta web muestra distintos eventos tales como: Conciertos, Festivales, Salidas recreativas, etc; consumiendo los datos desde una API externa. Esta aplicación formo parte del Bootcamp impartido por MindHub para poner en practica los conocimientos de las tecnologías aprendidas. La intención de este proyecto es crear una interfaz dinámica que muetre la información proveniente de una base de datos emulada por una API externa.
 
 ### Detalles técnicos
 
-- Creación de páginas para mostrar los distintos eventos de manera dinámica.
-- Comunicación con la API a travez del método `fetch()` para traer los datos requeridos.
+- Creación de las distintas páginas que muestran los eventos correspondientes de manera dinámica.
+- Creación de la página de estadisticas que muestra la concurrencia de gente que hubo en cada evento.
+- Comunicación con la API a travez del método `fetch()` para mostrar los datos requeridos.
