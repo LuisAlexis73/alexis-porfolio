@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 
 const projects = await getCollection(
   "projects",
-  (project) => project.data.featured
+  (project) => project.data
 );
 ---
 
