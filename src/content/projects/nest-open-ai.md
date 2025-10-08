@@ -10,7 +10,7 @@ stack:
   - class-validator
   - class-transformer
   - nestjs/config
-demoUrl: "https://github.com/LuisAlexis73/exercises-openAI-back"
+videoUrl: "https://youtu.be/tHfufH9Ou1I"
 codeUrl: "https://github.com/LuisAlexis73/exercises-openAI-back"
 variant: "default"
 featured: false
