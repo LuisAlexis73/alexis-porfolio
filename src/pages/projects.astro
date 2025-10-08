@@ -6,6 +6,12 @@ import { getCollection } from "astro:content";
 const projects = await getCollection(
   "projects",
   (project) => project.data
+).then((projects) =>
+  projects.sort((a, b) => {
+    const dateA = new Date(String(a.data.date));
+    const dateB = new Date(String(b.data.date));
+    return dateB.getTime() - dateA.getTime();
+  })
 );
 ---
 
