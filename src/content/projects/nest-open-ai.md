@@ -1,6 +1,6 @@
 ---
 title: "API de Integración con OpenAI"
-description: "API RESTful desarrollada con NestJS que demuestra la integración efectiva con los servicios de inteligencia artificial de OpenAI. El proyecto implementa múltiples casos de uso prácticos, desde procesamiento de texto hasta manejo de archivos multimedia, siguiendo arquitectura modular y buenas prácticas de desarrollo backend."
+description: "API RESTful que demuestra la integración efectiva con los servicios de OpenAI. El proyecto implementa múltiples casos de uso  siguiendo arquitectura modular y buenas prácticas de desarrollo."
 image: "/images/nest-1.jpg"
 stack:
   - NestJS
