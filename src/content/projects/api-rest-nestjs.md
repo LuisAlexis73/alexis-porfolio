@@ -1,7 +1,7 @@
 ---
 title: "API E-commerce NestJS"
 description: "API RESTful completa de e-commerce construida con NestJS, que incluye gestión de productos, autenticación JWT, sistema de roles y manejo de archivos multimedia."
-image: "/images/captura-api-express.png"
+image: "/images/captura-api-nestjs.png"
 stack:
   - NestJS
   - TypeScript
