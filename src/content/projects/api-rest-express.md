@@ -10,7 +10,7 @@ stack:
   - Mongoose
   - JWT
 demoUrl: "https://apirest-prueba-express.onrender.com/api-docs"
-codeUrl: "https://github.com/LuisAlexis73/odoo_gantt/tree/main"
+codeUrl: "https://github.com/LuisAlexis73/apirest-prueba-express"
 variant: "default"
 featured: false
 date: "2025-02-17"
