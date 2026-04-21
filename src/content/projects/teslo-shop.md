@@ -17,7 +17,7 @@ stack:
 demoUrl: "https://lag-shop.vercel.app/"
 codeUrl: "https://github.com/LuisAlexis73/e-commerce-nextjs/blob/master/README.md"
 variant: "default"
-featured: true
+featured: false
 date: "2025-08-20"
 ---
 
