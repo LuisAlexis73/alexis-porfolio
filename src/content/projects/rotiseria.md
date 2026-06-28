@@ -12,7 +12,7 @@ stack:
   - Vite
   - SQLite
   - Better SQLite3
-videoUrl: "https://youtu.be/-i14EeRNcHE"
+videoUrl: "https://youtu.be/wwt8aNwZ6PU"
 variant: "default"
 featured: true
 date: "2026-04-10"
